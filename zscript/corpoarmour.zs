@@ -292,8 +292,8 @@ class HDCorporateArmourWorn : HDArmourWorn {
 		int armourdamage=0;
 
 		int resist=0;
-		if(durability<HDCONST_BATTLEARMOUR){
-			int breakage=HDCONST_BATTLEARMOUR-durability;
+		if(durability<HDCONST_CORPORATEARMOUR){
+			int breakage=HDCONST_CORPORATEARMOUR-durability;
 			resist-=random(0,breakage);
 		}
 
