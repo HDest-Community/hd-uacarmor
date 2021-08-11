@@ -10,5 +10,6 @@ Ironically, combat after action reports showed that personnel issued this armour
 - Better protection that battle armour.
 - As light as garrison armour. 
 - Protects from environmental damage like a radsuit.
-- Can block 7.76 reliably, but the mastermind will chew it up quickly. Self-healing.
+- Can block 7.76 reliably, but the mastermind will chew it up quickly.
+- Self-healing.
 - Does not make you invincible.
