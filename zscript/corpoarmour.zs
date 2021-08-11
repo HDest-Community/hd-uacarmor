@@ -246,7 +246,7 @@ class HDCorporateArmourWorn : HDArmourWorn {
 		let victim=owner;
 
 		//approximation of "thickness" of armour
-		int alv=6;
+		int alv=3;
 
 		if(
 			(flags&DMG_NO_ARMOR)
@@ -475,7 +475,7 @@ class HDCorporateArmourWorn : HDArmourWorn {
 
 		double hitheight=hitactoristall?((hitpos.z-hitactor.pos.z)/hitactor.height):0.5;
 
-		double addpenshell=60;
+		double addpenshell=40;
 
 		//poorer armour on legs and head
 		//sometimes slip through a gap
