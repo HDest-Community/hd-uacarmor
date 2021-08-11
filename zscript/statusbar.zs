@@ -827,7 +827,7 @@ class HDStatusBar:DoomStatusBar{
 			string armourback="ARMER1";
 			drawbar(
 				armoursprite,armourback,
-				corpoarmour.durability,107,
+				corpoarmour.durability,40,
 				armourcoords,-1,SHADER_VERT,
 				flags
 			);

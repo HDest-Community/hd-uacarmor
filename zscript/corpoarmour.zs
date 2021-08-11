@@ -1,4 +1,4 @@
-const HDCONST_CORPORATEARMOUR=107;
+const HDCONST_CORPORATEARMOUR=40;
 
 class HDCorporateArmour : HDMagAmmo {
 	default {
@@ -195,7 +195,7 @@ class HDCorporateArmourWorn : HDArmourWorn {
 		counter++;
 		if(counter%140==0 && durability<HDCONST_CORPORATEARMOUR){
 			int repairchance=durability/10;
-			int repairamtmax=repairchance/2;
+			int repairamtmax=repairchance;
 			if(repairchance<1)repairchance=1;
 			if(random(0,20)+(countinv("IsMoving")/10)<=repairchance)durability+=random(1,repairamtmax);
 		}
