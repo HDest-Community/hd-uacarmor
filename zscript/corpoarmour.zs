@@ -105,31 +105,40 @@ class HDCorporateArmour : HDMagAmmo {
 		}
 	}
 
-	override void ActualPickup(actor other,bool silent){
-		cooldown = 0;
-		if (!other) {
-			return;
-		}
-		int durability = mags[mags.Size() - 1];
+	override bool BeforePockets(actor other){
 		//put on the armour right away
-		if (
-			other.player && other.player.cmd.buttons & BT_USE &&
-			!other.FindInventory("HDArmourWorn") && !other.FindInventory("HDCorporateArmourWorn") &&
-			HDPlayerPawn(other).striptime == 0
-		) {
-			HDArmour.ArmourChangeEffect(other);
-			let worn = HDCorporateArmourWorn(other.GiveInventoryType("HDCorporateArmourWorn"));
-			worn.durability = durability;
-			Destroy();
-			return;
+		if(
+			other.player
+			&&other.player.cmd.buttons&BT_USE
+			&&!other.findinventory("HDCorporateArmourWorn")
+		){
+			wornlayer=STRIP_ARMOUR;
+			bool intervening=!HDPlayerPawn.CheckStrip(other,self,false);
+			wornlayer=0;
+
+			if(intervening)return false;
+
+			HDArmour.ArmourChangeEffect(other,110);
+			let worn=HDCorporateArmourWorn(other.GiveInventoryType("HDCorporateArmourWorn"));
+			int durability=mags[mags.size()-1];
+			worn.durability=durability;
+			destroy();
+			return true;
 		}
+		return false;
+	}
+
+	override void ActualPickup(actor other,bool silent){
+		cooldown=0;
+		if(!other)return;
+		int durability=mags[mags.size()-1];
 		if(!trypickup(other))return;
-		HDCorporateArmour aaa = HDCorporateArmour(other.findinventory("HDCorporateArmour"));
-		aaa.SyncAmount();
-		aaa.mags.Insert(0, durability);
-		aaa.mags.Pop();
-		other.A_StartSound(pickupsound, CHAN_AUTO);
-		other.A_Log(string.Format("\cg%s", PickupMessage()), true);
+		HDCorporateArmour aaa=HDCorporateArmour(other.findinventory("HDCorporateArmour"));
+		aaa.syncamount();
+		aaa.mags.insert(0,durability);
+		aaa.mags.pop();
+		other.A_StartSound(pickupsound,CHAN_AUTO);
+		other.A_Log(string.format("\cg%s",pickupmessage()),true);
 	}
 
 	override void BeginPlay(){
