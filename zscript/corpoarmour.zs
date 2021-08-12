@@ -475,7 +475,7 @@ class HDCorporateArmourWorn : HDArmourWorn {
 
 		double hitheight=hitactoristall?((hitpos.z-hitactor.pos.z)/hitactor.height):0.5;
 
-		double addpenshell=40;
+		double addpenshell=35;
 
 		//poorer armour on legs and head
 		//sometimes slip through a gap
