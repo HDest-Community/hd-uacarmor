@@ -245,6 +245,35 @@ class HDArmourWorn:HDDamageHandler{
 	override double getbulk(){
 		return mega?(ENC_BATTLEARMOUR*0.16):(ENC_GARRISONARMOUR*0.1);
 	}
+
+
+	override void DrawHudStuff(
+		hdstatusbar sb,
+		hdplayerpawn hpl,
+		int hdflags,
+		int gzflags
+	){
+		vector2 coords=
+			(hdflags&HDSB_AUTOMAP)?(4,86):
+			(hdflags&HDSB_MUGSHOT)?((sb.hudlevel==1?-85:-55),-4):
+			(0,-sb.mIndexFont.mFont.GetHeight()*2)
+		;
+		string armoursprite=mega?"ARMCA0":"ARMSA0";
+		string armourback=mega?"ARMER1":"ARMER0";
+		sb.drawbar(
+			armoursprite,armourback,
+			durability,mega?HDCONST_BATTLEARMOUR:HDCONST_GARRISONARMOUR,
+			coords,-1,sb.SHADER_VERT,
+			gzflags
+		);
+		sb.drawstring(
+			sb.pnewsmallfont,sb.FormatNumber(durability),
+			coords+(10,-7),gzflags|sb.DI_ITEM_CENTER|sb.DI_TEXT_ALIGN_RIGHT,
+			Font.CR_DARKGRAY,scale:(0.5,0.5)
+		);
+	}
+
+
 	override inventory CreateTossable(int amt){
 		if(!HDPlayerPawn.CheckStrip(owner,self))return null;
 

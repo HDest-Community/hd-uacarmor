@@ -177,19 +177,28 @@ class HDCorporateArmour : HDMagAmmo {
 	}
 }
 
-class HDCorporateArmourWorn : HDArmourWorn {
+class HDCorporateArmourWorn : HDDamageHandler {
 	default {
+		+inventory.isarmor
+		inventory.maxamount 1;
+		HDDamageHandler.priority 0;
+		HDPickup.wornlayer STRIP_ARMOUR;
 		HDPickup.refid "awc";
 		Tag "corporate armour";
 	}
 	
+	int durability;
 	int counter;
 	
 	override void BeginPlay() {
-		Super.BeginPlay();
 		durability = HDCONST_CORPORATEARMOUR;
+		Super.BeginPlay();
 	}
-	
+
+	override void PostBeginPlay(){
+		super.postbeginplay();
+	}
+
 	override void Tick() {
 		Super.Tick();
 		counter++;
@@ -200,6 +209,40 @@ class HDCorporateArmourWorn : HDArmourWorn {
 			if(random(0,20)+(countinv("IsMoving")/10)<=repairchance)durability+=random(1,repairamtmax);
 		}
 		if(durability>HDCONST_CORPORATEARMOUR)durability=HDCONST_CORPORATEARMOUR;
+	}
+
+	override void RestrictSpeed(out double maxspeed){
+		maxspeed=min(maxspeed,3.);
+	}
+
+	override double GetBulk(){
+		return ENC_GARRISONARMOUR*0.1;
+	}
+
+	override void DrawHudStuff(
+		hdstatusbar sb,
+		hdplayerpawn hpl,
+		int hdflags,
+		int gzflags
+	){
+		vector2 coords=
+			(hdflags&HDSB_AUTOMAP)?(4,86):
+			(hdflags&HDSB_MUGSHOT)?((sb.hudlevel==1?-85:-55),-4):
+			(0,-sb.mIndexFont.mFont.GetHeight()*2)
+		;
+		string armoursprite="ARMEA0";
+		string armourback="ARMER2";
+		sb.drawbar(
+			armoursprite,armourback,
+			durability,HDCONST_CORPORATEARMOUR,
+			coords,-1,sb.SHADER_VERT,
+			gzflags
+		);
+		sb.drawstring(
+			sb.pnewsmallfont,sb.FormatNumber(durability),
+			coords+(10,-7),gzflags|sb.DI_ITEM_CENTER|sb.DI_TEXT_ALIGN_RIGHT,
+			Font.CR_DARKGRAY,scale:(0.5,0.5)
+		);
 	}
 	
 	override inventory CreateTossable(int amt){
@@ -548,6 +591,12 @@ class HDCorporateArmourWorn : HDArmourWorn {
 		if(durability<1)destroy();
 
 		return pen,penshell;
+	}
+
+	states{
+	spawn:
+		TNT1 A 0;
+		stop;
 	}
 }
 
