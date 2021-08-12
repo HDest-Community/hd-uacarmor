@@ -61,7 +61,15 @@ class HDCorporateArmour : HDMagAmmo {
 		invoker.wornlayer=0;
 
 		if(intervening){
-			if(invoker.cooldown>0){
+			//check if it's ONLY the armour layer that's in the way
+			invoker.wornlayer=STRIP_ARMOUR+1;
+			bool notarmour=!HDPlayerPawn.CheckStrip(self,invoker,false);
+			invoker.wornlayer=0;
+
+			if(
+				notarmour
+				||invoker.cooldown>0
+			){
 				HDPlayerPawn.CheckStrip(self,self);
 			}else invoker.cooldown=10;
 			return;
