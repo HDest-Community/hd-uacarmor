@@ -824,7 +824,7 @@ class HDStatusBar:DoomStatusBar{
 			);
 		}else if(corpoarmour){
 			string armoursprite="ARMEA0";
-			string armourback="ARMER1";
+			string armourback="ARMER2";
 			drawbar(
 				armoursprite,armourback,
 				corpoarmour.durability,40,
