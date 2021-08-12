@@ -56,35 +56,20 @@ class HDCorporateArmour : HDMagAmmo {
 			return;
 		}
 
-		let oaw=HDArmourWorn(findinventory("HDArmourWorn"));
-		let ocaw=HDArmourWorn(findinventory("HDCorporateArmourWorn"));
-
-		invoker.wornlayer=STRIP_ARMOUR+1;
+		invoker.wornlayer=STRIP_ARMOUR;
 		bool intervening=!HDPlayerPawn.CheckStrip(self,invoker,false);
 		invoker.wornlayer=0;
 
 		if(intervening){
-			invoker.wornlayer=STRIP_ARMOUR;
-			HDPlayerPawn.CheckStrip(self,invoker);
-			invoker.wornlayer=0;
-			return;
-		}else if(oaw){
 			if(invoker.cooldown>0){
-				dropinventory(oaw);
-				A_Log("Removing "..oaw.gettag().." first.",true);
-			}else invoker.cooldown=10;
-			return;
-		}else if(ocaw){
-			if(invoker.cooldown>0){
-				dropinventory(ocaw);
-				A_Log("Removing "..ocaw.gettag().." first.",true);
+				HDPlayerPawn.CheckStrip(self,self);
 			}else invoker.cooldown=10;
 			return;
 		}
 
 		//and finally put on the actual armour
 		HDArmour.ArmourChangeEffect(self);
-		let worn = HDArmourWorn(GiveInventoryType("HDCorporateArmourWorn"));
+		let worn = HDCorporateArmourWorn(GiveInventoryType("HDCorporateArmourWorn"));
 		worn.durability = dbl;
 		invoker.amount--;
 		invoker.mags.Pop();
@@ -125,7 +110,7 @@ class HDCorporateArmour : HDMagAmmo {
 			HDPlayerPawn(other).striptime == 0
 		) {
 			HDArmour.ArmourChangeEffect(other);
-			let worn = HDArmourWorn(other.GiveInventoryType("HDCorporateArmourWorn"));
+			let worn = HDCorporateArmourWorn(other.GiveInventoryType("HDCorporateArmourWorn"));
 			worn.durability = durability;
 			Destroy();
 			return;
