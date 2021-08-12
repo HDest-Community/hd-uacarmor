@@ -208,7 +208,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 			int repairchance=durability/10;
 			int repairamtmax=repairchance;
 			if(repairchance<1)repairchance=1;
-			if(random(0,20)+(countinv("IsMoving")/10)<=repairchance)durability+=random(1,repairamtmax);
+			if(random(0,15)+(countinv("IsMoving")/10)<=repairchance)durability+=random(1,repairamtmax);
 		}
 		if(durability>HDCONST_CORPORATEARMOUR)durability=HDCONST_CORPORATEARMOUR;
 	}
