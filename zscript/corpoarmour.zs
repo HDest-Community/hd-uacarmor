@@ -214,7 +214,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 	}
 
 	override void RestrictSpeed(out double maxspeed){
-		maxspeed=min(maxspeed,3.);
+		maxspeed=min(maxspeed,2.75);
 	}
 
 	override double GetBulk(){
