@@ -1,4 +1,5 @@
 const HDCONST_CORPORATEARMOUR=40;
+const ENC_CORPORATEARMOUR=530;
 
 class HDCorporateArmour : HDMagAmmo {
 	default {
@@ -8,7 +9,7 @@ class HDCorporateArmour : HDMagAmmo {
 		+Inventory.ISARMOR
 		Inventory.amount 1;
 		HDMagammo.maxperunit HDCONST_CORPORATEARMOUR;
-		HDMagammo.magbulk ENC_GARRISONARMOUR;
+		HDMagammo.magbulk ENC_CORPORATEARMOUR;
 		Tag "corporate armour";
 		Inventory.icon "CARMA0";
 		Inventory.pickupmessage "Picked up the corporate armour.";
@@ -152,7 +153,7 @@ class HDCorporateArmour : HDMagAmmo {
 		SyncAmount();
 		double blk = 0;
 		for (int i = 0; i < amount; i++) {
-			blk += ENC_GARRISONARMOUR;
+			blk += ENC_CORPORATEARMOUR;
 		}
 		return blk;
 	}
@@ -217,7 +218,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 	}
 
 	override double GetBulk(){
-		return ENC_GARRISONARMOUR*0.1;
+		return ENC_CORPORATEARMOUR*0.1;
 	}
 
 	override void DrawHudStuff(
@@ -611,7 +612,7 @@ class CorporateArmour : HDPickupGiver {
 		+inventory.isarmor
 		inventory.icon "CARMA0";
 		hdpickupgiver.pickuptogive "HDCorporateArmour";
-		hdpickup.bulk ENC_GARRISONARMOUR;
+		hdpickup.bulk ENC_CORPORATEARMOUR;
 		hdpickup.refid "arc";
 		tag "corporate armour (spare)";
 		inventory.pickupmessage "Picked up the corporate armour.";

@@ -8,7 +8,7 @@ An advanced set of combat armour built and developed by the UAC. The outer plate
 Ironically, combat after action reports showed that personnel issued this armour were statistically more likely to be casualties. Interviews with survivors revealed "feelings of invincibility" and "delusions of grandeur" when wearing the armour.
 
 - Better protection that battle armour.
-- As light as garrison armour. 
+- Lighter than battle armour. 
 - Protects from environmental damage like a radsuit.
 - Can block 7.76, sometimes. Don't rely on it.
 - Self-healing.
