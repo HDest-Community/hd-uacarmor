@@ -10,7 +10,7 @@ class HDCorporateArmour : HDMagAmmo {
 		HDMagammo.maxperunit HDCONST_CORPORATEARMOUR;
 		HDMagammo.magbulk ENC_GARRISONARMOUR;
 		Tag "corporate armour";
-		Inventory.icon "ARMEA0";
+		Inventory.icon "CARMA0";
 		Inventory.pickupmessage "Picked up the corporate armour.";
 	}
 	
@@ -163,7 +163,7 @@ class HDCorporateArmour : HDMagAmmo {
 			return;
 		}
 		Super.SyncAmount();
-		icon = TexMan.CheckForTexture("ARMEA0", TexMan.Type_MiscPatch);
+		icon = TexMan.CheckForTexture("CARMA0", TexMan.Type_MiscPatch);
 		for (int i = 0; i < amount; i++) {
 			mags[i] = Min(mags[i], HDCONST_CORPORATEARMOUR);
 		}
@@ -171,7 +171,7 @@ class HDCorporateArmour : HDMagAmmo {
 
 	States {
 		Spawn:
-			ARME A -1;
+			CARM A -1;
 			stop;
 		Use:
 			TNT1 A 0 A_WearArmour();
@@ -231,8 +231,8 @@ class HDCorporateArmourWorn : HDDamageHandler {
 			(hdflags&HDSB_MUGSHOT)?((sb.hudlevel==1?-85:-55),-4):
 			(0,-sb.mIndexFont.mFont.GetHeight()*2)
 		;
-		string armoursprite="ARMEA0";
-		string armourback="ARMER2";
+		string armoursprite="CARMA0";
+		string armourback="CARMB0";
 		sb.drawbar(
 			armoursprite,armourback,
 			durability,HDCONST_CORPORATEARMOUR,
@@ -605,11 +605,11 @@ class CorporateArmour : HDPickupGiver {
 	default {
 		//$Category "Items/Hideous Destructor"
 		//$Title "Corporate Armour"
-		//$Sprite "ARMEA0"
+		//$Sprite "CARMA0"
 		+missilemore
 		+hdpickup.fitsinbackpack
 		+inventory.isarmor
-		inventory.icon "ARMEA0";
+		inventory.icon "CARMA0";
 		hdpickupgiver.pickuptogive "HDCorporateArmour";
 		hdpickup.bulk ENC_GARRISONARMOUR;
 		hdpickup.refid "arc";
