@@ -186,7 +186,6 @@ class HDCorporateArmourWorn : HDDamageHandler {
 		inventory.maxamount 1;
 		HDDamageHandler.priority 0;
 		HDPickup.wornlayer STRIP_ARMOUR;
-		HDPickup.refid "awu";
 		Tag "corporate armour";
 	}
 	
@@ -623,5 +622,25 @@ class CorporateArmour : HDPickupGiver {
 		aaa.mags.clear();
 		aaa.mags.push(HDCONST_CORPORATEARMOUR);
 		aaa.syncamount();
+	}
+}
+
+class CorporateArmourWorn : HDPickup{
+	default {
+		-hdpickup.fitsinbackpack
+		+inventory.isarmor
+		hdpickup.refid "awu";
+		tag "corporate armour";
+		inventory.maxamount 1;
+	}
+
+	override void postbeginplay() {
+		super.postbeginplay();
+		if(owner) {
+			let aaa=owner.findinventory("HDArmourWorn");
+			if(aaa)aaa.destroy();
+			owner.A_GiveInventory("HDCorporateArmourWorn");
+		}
+		destroy();
 	}
 }
