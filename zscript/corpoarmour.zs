@@ -186,7 +186,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 		inventory.maxamount 1;
 		HDDamageHandler.priority 0;
 		HDPickup.wornlayer STRIP_ARMOUR;
-		HDPickup.refid "awc";
+		HDPickup.refid "awu";
 		Tag "corporate armour";
 	}
 	
@@ -613,7 +613,7 @@ class CorporateArmour : HDPickupGiver {
 		inventory.icon "CARMA0";
 		hdpickupgiver.pickuptogive "HDCorporateArmour";
 		hdpickup.bulk ENC_CORPORATEARMOUR;
-		hdpickup.refid "arc";
+		hdpickup.refid "aru";
 		tag "corporate armour (spare)";
 		inventory.pickupmessage "Picked up the corporate armour.";
 	}
