@@ -477,7 +477,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 		//apply stuff
 		if(tobash>0)victim.damagemobj(
 			inflictor,source,min(tobash,victim.health-1),
-			mod,DMG_NO_ARMOR|DMG_THRUSTLESS
+			"bashing",DMG_NO_ARMOR|DMG_THRUSTLESS
 		);
 
 		if(armourdamage>0)durability-=armourdamage;
