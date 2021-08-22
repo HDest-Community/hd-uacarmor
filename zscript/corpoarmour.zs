@@ -197,10 +197,6 @@ class HDCorporateArmourWorn : HDDamageHandler {
 		Super.BeginPlay();
 	}
 
-	override void PostBeginPlay(){
-		super.postbeginplay();
-	}
-
 	override void Tick() {
 		Super.Tick();
 		counter++;
