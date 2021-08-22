@@ -606,7 +606,6 @@ class CorporateArmour : HDPickupGiver {
 		//$Category "Items/Hideous Destructor"
 		//$Title "Corporate Armour"
 		//$Sprite "CARMA0"
-		+missilemore
 		+hdpickup.fitsinbackpack
 		+inventory.isarmor
 		inventory.icon "CARMA0";
