@@ -191,10 +191,29 @@ class HDCorporateArmourWorn : HDDamageHandler {
 	
 	int durability;
 	int counter;
+
+	override void AttachToOwner(actor other) {
+		BecomeItem();
+		other.AddInventory(self);
+
+		//in case it's added in a loadout
+		if(CheckConflictingWornLayer(owner)){
+			amount=0;
+			return;
+		}
+		
+		if(overlaypriority){
+			let hpl=HDPlayerPawn(owner);
+			if(
+				hpl
+				&&hpl==other
+			)hpl.GetOverlayGivers(hpl.OverlayGivers);
+		}
+	}
 	
 	override void BeginPlay() {
-		durability = HDCONST_CORPORATEARMOUR;
 		Super.BeginPlay();
+		durability = HDCONST_CORPORATEARMOUR;
 	}
 
 	override void Tick() {
@@ -632,8 +651,10 @@ class CorporateArmourWorn : HDPickup{
 	override void postbeginplay() {
 		super.postbeginplay();
 		if(owner) {
-			let aaa=owner.findinventory("HDArmourWorn");
-			if(aaa)aaa.destroy();
+			for(inventory iii=owner.inv;iii!=null;iii=iii.inv){
+				let hdp=hdpickup(iii);
+				if(hdp.wornlayer==STRIP_ARMOUR)hdp.destroy();
+			}
 			owner.A_GiveInventory("HDCorporateArmourWorn");
 		}
 		destroy();
