@@ -653,7 +653,7 @@ class CorporateArmourWorn : HDPickup{
 		if(owner) {
 			for(inventory iii=owner.inv;iii!=null;iii=iii.inv){
 				let hdp=hdpickup(iii);
-				if(hdp.wornlayer==STRIP_ARMOUR)hdp.destroy();
+				if(hdp&&hdp.wornlayer==STRIP_ARMOUR)hdp.destroy();
 			}
 			owner.A_GiveInventory("HDCorporateArmourWorn");
 		}
