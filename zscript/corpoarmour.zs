@@ -227,8 +227,8 @@ class HDCorporateArmourWorn : HDDamageHandler {
 		durability=HDCONST_CORPORATEARMOUR;
 	}
 
-	override void RestrictSpeed(out double maxspeed){
-		maxspeed=min(maxspeed,2.75);
+	override double RestrictSpeed(double speedcap){
+		return min(speedcap,2.75);
 	}
 
 	override double GetBulk(){
