@@ -210,7 +210,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 	override void DetachFromOwner()
 	{
 		Super.DetachFromOwner();
-		owner.A_TakeInventory("HDFireDouse",15);
+		owner.A_TakeInventory("HDFireDouse",20);
 	}
 	
 	override void BeginPlay() {
@@ -220,7 +220,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 
 	override void Tick() {
 		Super.Tick();
-		owner.A_GiveInventory("HDFireDouse",15);
+		owner.A_GiveInventory("HDFireDouse",20);
 		owner.A_TakeInventory("Heat");
 		counter++;
 		if(counter%140==0 && durability<HDCONST_CORPORATEARMOUR)durability+=random(0,1);
