@@ -77,8 +77,9 @@ class HDCorporateArmour : HDMagAmmo {
 		}
 
 		//and finally put on the actual armour
-		HDArmour.ArmourChangeEffect(self);
-		let worn = HDCorporateArmourWorn(GiveInventoryType("HDCorporateArmourWorn"));
+		HDArmour.ArmourChangeEffect(self,100);
+		A_GiveInventory("HDCorporateArmourWorn");
+		let worn = HDCorporateArmourWorn(FindInventory("HDCorporateArmourWorn"));
 		worn.durability = dbl;
 		invoker.amount--;
 		invoker.mags.Pop();
@@ -150,12 +151,7 @@ class HDCorporateArmour : HDMagAmmo {
 	override void Consolidate() {}
 
 	override double GetBulk(){
-		SyncAmount();
-		double blk = 0;
-		for (int i = 0; i < amount; i++) {
-			blk += ENC_CORPORATEARMOUR;
-		}
-		return blk;
+		return ENC_CORPORATEARMOUR * 0.145;
 	}
 
 	override void SyncAmount() {
@@ -210,6 +206,12 @@ class HDCorporateArmourWorn : HDDamageHandler {
 			)hpl.GetOverlayGivers(hpl.OverlayGivers);
 		}
 	}
+
+	override void DetachFromOwner()
+	{
+		Super.DetachFromOwner();
+		owner.A_TakeInventory("HDFireDouse",15);
+	}
 	
 	override void BeginPlay() {
 		Super.BeginPlay();
@@ -218,6 +220,8 @@ class HDCorporateArmourWorn : HDDamageHandler {
 
 	override void Tick() {
 		Super.Tick();
+		owner.A_GiveInventory("HDFireDouse",15);
+		owner.A_TakeInventory("Heat");
 		counter++;
 		if(counter%140==0 && durability<HDCONST_CORPORATEARMOUR)durability+=random(0,1);
 		if(durability>HDCONST_CORPORATEARMOUR)durability=HDCONST_CORPORATEARMOUR;
@@ -228,7 +232,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 	}
 
 	override double RestrictSpeed(double speedcap){
-		return min(speedcap,2.75);
+		return min(speedcap,2.35);
 	}
 
 	override double GetBulk(){
@@ -278,7 +282,6 @@ class HDCorporateArmourWorn : HDDamageHandler {
 		}
 
 		//finally actually take off the armour
-		HDArmour.ArmourChangeEffect(owner,90);
 		let tossed=HDCorporateArmour(owner.spawn("HDCorporateArmour",
 			(owner.pos.x,owner.pos.y,owner.pos.z+owner.height-20),
 			ALLOW_REPLACE
@@ -286,6 +289,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 		tossed.mags.clear();
 		tossed.mags.push(durability);
 		tossed.amount=1;
+		HDArmour.ArmourChangeEffect(owner,90);
 		destroy();
 		return tossed;
 	}
@@ -361,22 +365,39 @@ class HDCorporateArmourWorn : HDDamageHandler {
 
 		//start treating damage types
 		if(mod=="slime"){
-			victim.A_SetInventory("Heat",countinv("Heat")+max(0,damage-random(4,20)));
-			damage=0;
+			resist+=20*(alv+1);
+			if(resist>0){
+				damage-=resist;
+				toburn=min(originaldamage,resist)>>2;
+			}
 		}else if(
 			mod=="hot"
 			||mod=="cold"
+			||mod=="balefire"
 		){
-			if(damage<random(0,21))damage=0;
-			else{
-				int olddamage=damage>>1;
-				damage=olddamage>>2;
-				if(!damage&&random(0,olddamage))damage=1;
+			resist+=20*(alv+1);
+			if(resist>0){
+				toburn=min(originaldamage,resist)>>4;
+				if(damage>21){
+					int olddamage=damage>>3;
+					damage=olddamage>>4;
+					if(!damage&&random(0,olddamage))damage=1;
+					armourdamage=random(0,originaldamage>>3);
+				}
+				else damage=0;
 			}
 		}else if(mod=="electrical"){
-			int olddamage=damage>>2;
-			damage=olddamage>>3;
-			if(!damage&&random(0,olddamage))damage=1;
+			resist+=20*(alv+1);
+			if(resist>0){
+				toburn=min(originaldamage,resist)>>4;
+				if(damage>30){
+					int olddamage=damage>>1;
+					damage=olddamage>>2;
+					if(!damage&&random(0,olddamage))damage=1;
+					armourdamage=random(0,originaldamage>>2);
+				}
+				else damage=0;
+			}
 		}else if(mod=="piercing"){
 			resist+=30*(alv+1);
 			if(resist>0){
@@ -402,13 +423,6 @@ class HDCorporateArmourWorn : HDDamageHandler {
 				tobash=min(originaldamage,resist)>>3;
 			}
 			armourdamage=random(0,originaldamage>>3);
-		}else if(
-			mod=="balefire"
-		){
-			if(random(0,alv)){
-				towound-=max(1,damage>>2);
-				armourdamage=random(0,damage>>2);
-			}
 		}else if(
 			mod=="bashing"
 			||mod=="melee"
