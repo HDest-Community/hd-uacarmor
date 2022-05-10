@@ -399,35 +399,35 @@ class HDCorporateArmourWorn : HDDamageHandler {
 				else damage=0;
 			}
 		}else if(mod=="piercing"){
-			resist+=30*(alv+1);
+			resist+=40*(alv+1);
 			if(resist>0){
 				damage-=resist;
-				tobash=min(originaldamage,resist)>>3;
+				tobash=min(originaldamage,resist)>>4;
 			}
-			armourdamage=random(0,originaldamage>>2);
+			armourdamage=random(0,originaldamage>>3);
 		}else if(mod=="slashing"){
-			resist+=100+25*alv;
-			if(resist>0){
-				damage-=resist;
-				tobash=min(originaldamage,resist)>>2;
-			}
-			armourdamage=random(0,originaldamage>>2);
-		}else if(
-			mod=="teeth"
-			||mod=="claws"
-			||mod=="natural"
-		){
-			resist+=random((alv<<4),100+50*alv);
+			resist+=100+35*alv;
 			if(resist>0){
 				damage-=resist;
 				tobash=min(originaldamage,resist)>>3;
 			}
 			armourdamage=random(0,originaldamage>>3);
 		}else if(
+			mod=="teeth"
+			||mod=="claws"
+			||mod=="natural"
+		){
+			resist+=random((alv<<4),100+60*alv);
+			if(resist>0){
+				damage-=resist;
+				tobash=min(originaldamage,resist)>>4;
+			}
+			armourdamage=random(0,originaldamage>>4);
+		}else if(
 			mod=="bashing"
 			||mod=="melee"
 		){
-			armourdamage=clamp((originaldamage>>3),0,random(0,alv));
+			armourdamage=clamp((originaldamage>>4),0,random(0,alv));
 
 			//player punch to head
 			bool headshot=inflictor&&(
@@ -444,7 +444,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 			}
 		}else{
 			//any other damage not taken care of above
-			resist+=50*alv;
+			resist+=60*alv;
 			if(resist>0){
 				damage-=resist;
 				tobash=min(originaldamage,resist)>>random(0,2);
