@@ -585,7 +585,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 		if(addpenshell>0){
 			//degrade and puff
 			double bad=min(pen,addpenshell)*bullet.stamina*0.0005;
-			armourdamage=random(-1,int(bad));
+			armourdamage=random(-1,int(bad))>>1;
 
 			if(armourdamage>0){
 				actor p=spawn(armourdamage>2?"FragPuff":"WallChunk",bullet.pos,ALLOW_REPLACE);
