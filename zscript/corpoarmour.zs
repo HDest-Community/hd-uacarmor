@@ -365,36 +365,36 @@ class HDCorporateArmourWorn : HDDamageHandler {
 
 		//start treating damage types
 		if(mod=="slime"){
-			resist+=20*(alv+1);
+			resist+=10*(alv+1);
 			if(resist>0){
 				damage-=resist;
-				toburn=min(originaldamage,resist)>>2;
+				toburn=min(originaldamage,resist)>>1;
 			}
 		}else if(
 			mod=="hot"
 			||mod=="cold"
 			||mod=="balefire"
 		){
-			resist+=20*(alv+1);
+			resist+=10*(alv+1);
 			if(resist>0){
-				toburn=min(originaldamage,resist)>>4;
+				toburn=min(originaldamage,resist)>>3;
 				if(damage>21){
-					int olddamage=damage>>3;
-					damage=olddamage>>4;
+					int olddamage=damage>>2;
+					damage=olddamage>>3;
 					if(!damage&&random(0,olddamage))damage=1;
-					armourdamage=random(0,originaldamage>>3);
+					armourdamage=random(0,originaldamage>>2);
 				}
 				else damage=0;
 			}
 		}else if(mod=="electrical"){
-			resist+=20*(alv+1);
+			resist+=10*(alv+1);
 			if(resist>0){
-				toburn=min(originaldamage,resist)>>4;
-				if(damage>30){
+				toburn=min(originaldamage,resist)>>3;
+				if(damage>60){
 					int olddamage=damage>>1;
 					damage=olddamage>>2;
 					if(!damage&&random(0,olddamage))damage=1;
-					armourdamage=random(0,originaldamage>>2);
+					armourdamage=random(0,originaldamage>>1);
 				}
 				else damage=0;
 			}
