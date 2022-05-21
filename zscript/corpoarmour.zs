@@ -295,13 +295,13 @@ class HDCorporateArmourWorn : HDDamageHandler {
 	}
 	
 	//called from HDPlayerPawn and HDMobBase's DamageMobj
-	override int,name,int,int,int,int,int HandleDamage(
+	override int,name,int,double,int,int,int HandleDamage(
 		int damage,
 		name mod,
 		int flags,
 		actor inflictor,
 		actor source,
-		int towound,
+		double towound,
 		int toburn,
 		int tostun,
 		int tobreak
