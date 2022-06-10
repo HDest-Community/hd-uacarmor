@@ -1,3 +1,4 @@
-GameInfo {
+GameInfo
+{
 	AddEventHandlers = "UACArmourHandler"
 }
