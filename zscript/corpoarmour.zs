@@ -486,7 +486,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 				hdp
 				&&!hdp.incapacitated
 			){
-				hdp.hudbobrecoil2+=(frandom(-5.,5.),frandom(2.5,4.))*0.01*originaldamage;
+				hdp.wepbobrecoil2+=(frandom(-5.,5.),frandom(2.5,4.))*0.01*originaldamage;
 				hdp.playrunning();
 			}else if(random(0,255)<victim.painchance)hdmobbase.forcepain(victim);
 		}
@@ -613,7 +613,7 @@ class HDCorporateArmourWorn : HDDamageHandler {
 				hdp
 				&&!hdp.incapacitated
 			){
-				hdp.hudbobrecoil2+=(frandom(-5.,5.),frandom(2.5,4.))*0.01*hitheight*mass;
+				hdp.wepbobrecoil2+=(frandom(-5.,5.),frandom(2.5,4.))*0.01*hitheight*mass;
 				hdp.playrunning();
 			}else if(random(0,255)<hitactor.painchance) hdmobbase.forcepain(hitactor);
 		}
