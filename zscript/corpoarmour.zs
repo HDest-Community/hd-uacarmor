@@ -151,7 +151,12 @@ class HDCorporateArmour : HDMagAmmo {
 	override void Consolidate() {}
 
 	override double GetBulk(){
-		return ENC_CORPORATEARMOUR * 0.145;
+		SyncAmount();
+		double blk = 0;
+		for (int i = 0; i < amount; i++) {
+			blk += ENC_CORPORATEARMOUR;
+		}
+		return blk;
 	}
 
 	override void SyncAmount() {
