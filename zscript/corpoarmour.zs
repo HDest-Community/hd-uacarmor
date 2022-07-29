@@ -223,8 +223,8 @@ class HDCorporateArmourWorn : HDDamageHandler {
 		durability = HDCONST_CORPORATEARMOUR;
 	}
 
-	override void Tick() {
-		Super.Tick();
+	override void DoEffect() {
+		Super.DoEffect();
 		owner.A_GiveInventory("HDFireDouse",20);
 		owner.A_TakeInventory("Heat");
 		counter++;
