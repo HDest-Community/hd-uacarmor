@@ -1,0 +1,4 @@
+graphic CARMB0,37,27{
+	offset 15,17
+	patch CARMA0,0,0{translation "0:255=%[0,0,0]:[0.3,0.14,0]"}
+}
