@@ -181,7 +181,7 @@ class HDCorporateArmour : HDMagAmmo {
 	}
 }
 
-class HDCorporateArmourWorn : HDDamageHandler {
+class HDCorporateArmourWorn : HDArmourWorn {
 	default {
 		+inventory.isarmor
 		inventory.maxamount 1;
@@ -190,7 +190,6 @@ class HDCorporateArmourWorn : HDDamageHandler {
 		Tag "corporate armour";
 	}
 	
-	int durability;
 	int counter;
 
 	override void AttachToOwner(actor other) {
