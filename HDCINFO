@@ -1,0 +1,3 @@
+// UAC Corporate Armor Spawn Entries
+addSpawnTableSingleEntry => { "tableName": "GreenArmorReplaces", "name": "HDCorporateArmour", "weight": "0.046875", "persists": "true" }
+addSpawnTableSingleEntry => { "tableName": "BlueArmorReplaces", "name": "HDCorporateArmour", "weight": "0.09375", "persists": "true" }
