@@ -1,0 +1,2 @@
+// Merchant Store Filters
+server bool hdm_enable_corporatearmour = true;
