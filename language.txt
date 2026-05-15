@@ -1,0 +1,8 @@
+[enu default]
+
+// Merchant Store Entries
+
+// Corporate Armour
+MERCH_CAT_CORPORATEARMOUR         = "HalfBakedCake";
+MERCH_TAG_CORPORATEARMOUR         = "Corporate Armor";
+MERCH_FLAVOR_CORPORATEARMOUR      = "Self-healing. Does not make you invincible.";

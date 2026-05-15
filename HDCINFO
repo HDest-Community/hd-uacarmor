@@ -1,0 +1,6 @@
+// UAC Corporate Armor Spawn Entries
+addSpawnTableSingleEntry => { "tableName": "GreenArmorReplaces", "name": "HDCorporateArmour", "weight": "0.046875", "persists": "true" }
+addSpawnTableSingleEntry => { "tableName": "BlueArmorReplaces", "name": "HDCorporateArmour", "weight": "0.09375", "persists": "true" }
+
+// Merchant Store Entries
+newMerchantStoreItem => { "enabled": "#hdm_enable_corporatearmour", "type": "item", "category": "$MERCH_CAT_CORPORATEARMOUR", "item": "CorporateArmour", "icon": "CARMA0", "displayName": "$MERCH_TAG_CORPORATEARMOUR", "basePrice": "350", "flavorText": "$MERCH_FLAVOR_CORPORATEARMOUR" }
