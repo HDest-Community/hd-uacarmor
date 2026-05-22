@@ -1,5 +1,14 @@
 [enu default]
 
+TAG_CORPORATEARMOUR               = "Corporate Armor";
+PICKUP_CORPORATEARMOUR            = "Picked up the corporate armour.";
+
+CORPORATEARMOUR_DURABILITY_2      = "Just don't get hit.";
+CORPORATEARMOUR_DURABILITY_3      = "You cover your shameful nakedness with your filthy rags.";
+CORPORATEARMOUR_DURABILITY_6      = "It's better than nothing.";
+CORPORATEARMOUR_DURABILITY_75     = "This armour has definitely seen better days.";
+CORPORATEARMOUR_DURABILITY_95     = "This armour does not pass certification.";
+
 // Merchant Store Entries
 
 // Corporate Armour
