@@ -40,6 +40,7 @@ class HDCorporateArmourWorn : HDArmourWorn {
 		HDArmourWorn.armoursprite "CARMA0";
 		HDArmourWorn.armourback "CARMB0";
 
+		HDArmourWorn.coverage ARMOUR_TORSO|ARMOUR_ARMS|ARMOUR_LEGS;
 		HDArmourWorn.durability HDCONST_CORPORATEARMOUR;
 		HDArmourWorn.hindrance 2.35;
 		HDArmourWorn.thickness 3;
