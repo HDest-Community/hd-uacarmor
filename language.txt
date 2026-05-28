@@ -1,5 +1,9 @@
 [enu default]
 
+TAG_CORPORATEARMOUR               = "Corporate Armor";
+PICKUP_CORPORATEARMOUR            = "Picked up the corporate armour.";
+
+
 // Merchant Store Entries
 
 // Corporate Armour
