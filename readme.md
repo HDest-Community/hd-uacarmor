@@ -1,4 +1,8 @@
-### Notes
+# UAC Corporate Armour
+
+_Originally made by Half-Baked Cake (aka TwelveEyes), now maintained by the Community_  
+_Requires [HDCoreLib](https://github.com/HDest-Community/hdest-core-lib)_
+
 
 ---
 
