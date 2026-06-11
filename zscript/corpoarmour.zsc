@@ -1,5 +1,5 @@
 const HDCONST_CORPORATEARMOUR = 40;
-const ENC_CORPORATEARMOUR     = 530;
+const ENC_CORPORATEARMOUR     = 600;
 
 class HDCorporateArmour : HDArmour {
 	default {
@@ -17,7 +17,7 @@ class HDCorporateArmour : HDArmour {
 	override void Tick() {
 		super.Tick();
 
-		if (!(Level.time % (TICRATE * 4))) {
+		if (!(Level.time % (TICRATE * 6))) {
 			for (int i = 0; i < mags.size(); i++) if (mags[i] < maxperunit) mags[i] += random(0, 1);
 		}
 	}
@@ -34,7 +34,7 @@ class HDCorporateArmourWorn : HDArmourWorn {
 	default {
 		Tag "$TAG_CORPORATEARMOUR";
 
-		HDPickup.bulk ENC_CORPORATEARMOUR * 0.5;
+		HDPickup.bulk ENC_CORPORATEARMOUR * 0.65;
 		HDPickup.refid "awu";
 
 		HDArmourWorn.armoursprite "CARMA0";
@@ -71,7 +71,7 @@ class HDCorporateArmourWorn : HDArmourWorn {
 				|| mod == 'drowning'
 				|| mod == 'poison'
 				// || mod == 'electrical'
-				|| durability<random(1, durThresh) //it just goes through a gaping hole in your armour
+				// || durability<random(1, durThresh) //it just goes through a gaping hole in your armour
 				|| !owner;
 	}
 
@@ -122,6 +122,23 @@ class HDCorporateArmourWorn : HDArmourWorn {
 					}
 				}
 				break;
+			case 'piercing':
+				resist+=45*(alv+1);
+				if(resist>0){
+					damage-=resist;
+					tobash=min(damage,resist)>>3;
+				}
+				armourdamage=random(0,damage>>2);
+				break;
+			case 'slashing':
+				resist+=85+25*alv;
+				if(resist>0){
+					damage-=resist;
+					tobash=min(damage,resist)>>2;
+				}
+				armourdamage=random(0,damage>>2);
+				break;
+
 			default:
 				return super.HandleDamageType(mod, alv, inflictor, damage, armourdamage, towound, tobash, toburn, tostun, tobreak, resist);
 		}
